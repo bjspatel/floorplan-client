@@ -1,0 +1,22 @@
+{
+  "alert_name": "payment_refunded",
+  "amount": "486.13",
+  "balance_currency": "EUR",
+  "balance_earnings_decrease": "0.39",
+  "balance_fee_refund": "0.91",
+  "balance_gross_refund": "0.53",
+  "balance_tax_refund": "0.23",
+  "checkout_id": "8-67f355f7a7cd4dd-99d01d589d",
+  "currency": "EUR",
+  "earnings_decrease": "0.96",
+  "email": "lora.crona@example.org",
+  "event_time": "2019-01-07 12:14:42",
+  "fee_refund": "0.87",
+  "gross_refund": "0.71",
+  "marketing_consent": "1",
+  "order_id": "7",
+  "passthrough": "{\"client_id\":\"507f1f77bcf86cd799439999\"}",
+  "quantity": "69",
+  "tax_refund": "0.51",
+  "p_signature": "DGXXXQ1ZwxLWooUfbnB9ks3003mtk29CDp8TpvDx5uJytEtWxTfZKjxBAENngxpG+ugAkMwriYRhSqQWHan1fhjdxoSTfZaN1SBenzmHdpzTtZLK2Kwz20xVADaKikjWLFwy69GoXfrqMf8PFlz2VIAgRnRDx+OFiHG8GeDGTnyTKjj/dxTSq2HURqaBvCOGzlHNYtVci1m63jAhNpzJtGiqhb0uLmZA8J5M/oxQsFTGtguQb6NeuV89kmQ9iki7XHBBA6yiPHlz2tE5RC799FkR/fVTMbD5ECByCI5PbYC1Sbi8MlTBQEdizs6TJwfSZf+pTSwHEHwrXXew4iYG7+D/308MMXsTXBAn7xe7Dum/jFQ4gMer47UjZDmN4T3joHQSd6IJ/llpxL009ayfsf2OvnJPGP6T5L65piUYzWGoRgIQGrJxSGniqm3H//c7hOudUph2rF14YJDxT8VSYrJCOkKVxwPvtVo0j1JW1KTQ4rvsKPGxmxBquouFSMSOI34k910fV5y5NKrthRxFeLGiVc6PhMKKD5glZuGRv3Vhbv+7DXPSKy952rGtaHrCvyJ5IDyBNWFC+lzOw6ZCulLlxRenmvBaszISVr+gaoyAeN4KKuchB7A55BogRg86TcYJVo3Ligl2pJLlTsdwUFG1A9+95j5hPdGUd7zoAXI="
+}

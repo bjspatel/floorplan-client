@@ -1,0 +1,18 @@
+{
+  "alert_id": "7207070",
+  "alert_name": "subscription_created",
+  "cancel_url": "https://checkout.paddle.com/subscription/cancel?user=83&subscription=32&hash=59b6b38b6f1a747f4f2b7d341dff445b58b02723",
+  "checkout_id": "2-9437d84e9eb63d4-a3ca7377a0",
+  "currency": "USD",
+  "email": "client@deskradar.com",
+  "event_time": "2018-01-10 12:58:20",
+  "marketing_consent": "0",
+  "next_bill_date": "2018-02-10",
+  "passthrough": "{\"client_id\":\"507f1f77bcf86cd799439060\"}",
+  "quantity": "1",
+  "status": "active",
+  "subscription_id": "32",
+  "subscription_plan_id": "54",
+  "unit_price": "10",
+  "update_url": "https://checkout.paddle.com/subscription/update?user=83&subscription=32&hash=22e3ee22bf5011ff97822cb599c2cba37fb80015"
+}

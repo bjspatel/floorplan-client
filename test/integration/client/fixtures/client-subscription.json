@@ -1,0 +1,32 @@
+{
+  "name": "Subscription Client",
+  "email": "subscription.client@deskradar.com",
+  "email_confirmed": false,
+  "organization": "Deskradar Inc.",
+  "country": "US",
+  "consent": true,
+  "marketing_consent": true,
+  "approved": true,
+  "deployment": {
+    "status": "non_existent",
+    "domain": "subscriptiondomain",
+    "app_version": "1.0.0",
+    "trial": false,
+    "trial_end_date": "2018-01-10T00:00:00.000Z",
+    "node": "node12.net.deskradar.com",
+    "ipaddress": "54.230.129.183",
+    "ssh_port": 55732,
+    "deployed_at": "2018-01-10T00:00:00.000Z"
+  },
+  "subscriptions": [
+    {
+      "provider": "paddle",
+      "provider_subscription_id": "0123456789",
+      "provider_plan_id": "0123456789",
+      "status": "active",
+      "expiry_date": "2018-01-10T00:00:00.000Z",
+      "cancel_url": "https://checkout.paddle.com/subscription/cancel?user=9&subscription=4&hash=35a5af29140c1f3bf046ec25ff0c79c3d836f9de",
+      "update_url": "https://checkout.paddle.com/subscription/update?user=3&subscription=6&hash=7205e1472183d1cc870f229e9f762c947436ed07"
+    }
+  ]
+}

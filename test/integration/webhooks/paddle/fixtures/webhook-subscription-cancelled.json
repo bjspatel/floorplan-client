@@ -1,0 +1,16 @@
+{
+  "alert_id": "7207070",
+  "alert_name": "subscription_cancelled",
+  "cancellation_effective_date": "2018-02-16 00:00:00",
+  "checkout_id": "7-d69d4ed0a0fc926-59d728815d",
+  "email": "client@deskradar.com",
+  "event_time": "2018-01-10 12:58:20",
+  "marketing_consent": "",
+  "passthrough": "{\"client_id\":\"507f1f77bcf86cd799439060\"}",
+  "quantity": "1",
+  "status": "deleted",
+  "subscription_id": "32",
+  "subscription_plan_id": "54",
+  "unit_price": "10",
+  "user_id": "83"
+}

@@ -1,0 +1,18 @@
+{
+  "alert_name": "subscription_created",
+  "cancel_url": "https://checkout.paddle.com/subscription/cancel?user=4&subscription=1&hash=59b6b38b6f1a747f4f2b7d341dff445b58b02723",
+  "checkout_id": "2-9437d84e9eb63d4-a3ca7377a0",
+  "currency": "USD",
+  "email": "fleta.koelpin@example.org",
+  "event_time": "2018-08-28 19:24:40",
+  "marketing_consent": "",
+  "next_bill_date": "2018-08-02",
+  "passthrough": "{\"client_id\":\"507f1f77bcf86cd799439013\"}",
+  "quantity": "1",
+  "status": "active",
+  "subscription_id": "2",
+  "subscription_plan_id": "4",
+  "unit_price": "10",
+  "update_url": "https://checkout.paddle.com/subscription/update?user=8&subscription=6&hash=22e3ee22bf5011ff97822cb599c2cba37fb80015",
+  "p_signature": "lz5PFnFzX3Gmxb7OQFFpvdnLEEXOZJqiXpdB1YZiKCFiSYKpiiaZxtJUyOxQyxD0Q50gA39NTPdnL2EcgyGfxvulNmy9v2VVR+EGndBsB6Gl9BR5rFJMMmUC2B4AgrcQs04VWKBCee9neaLdCfGRtL+4xOC3fI+CASZpMyjTw254kN8U4dCgbfJrqy+uD8mie3iPVaNsLJAvA7umZGW39LeEs9AcSNwJwVnUcp0d+nszJnXrcBh+CPAE+jLUXyqV8LpeSAWBujO5sCLV3D23e0nNb+2ysyYyPoKDuHW5H3zIT2qXIfXpryyUXIJrz8bhhwL6oBeicdMlJZ7n7qhXXK3wlF77E1VTRdTqyfIer7W6kW7jOPbDo8beysXTzDX75LCklh92yRIiTAGcSPeg0xACcXAuOzEmCApmhnnqZpfNX7fEzza/x5rEUF6QHV6VUUrPi7rG4ACKEyimq4ILfNq+gW81X+teZ6UyKlZbR2tSIDjPHbFobEjr5HWwwbE2kjaZtNL7eL/jTpkDJtKbIYJmkW83p/84cQdwmhPsD/diENvHpCmky+RO5P/XKmjdAY4xw7CNUFRONwH6zEptEiQeD1xg2JNpt3h/H71PJKUotgf7yhF6n1KxL/FTBYEKgwdqCh6lC0LsMI+5qMEm9WTYHRtJqhSMab0AVIK1tEA="
+}

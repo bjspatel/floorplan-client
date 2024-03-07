@@ -1,0 +1,17 @@
+image: node:9
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - node
+        script:
+          - npm install
+          - npm test
+        services:
+          - mongo
+
+definitions:
+  services:
+    mongo:
+      image: mongo:3.4

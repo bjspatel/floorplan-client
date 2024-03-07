@@ -1,0 +1,9 @@
+{
+  "name": "John Doe ",
+  "email": "NonExisting.Client@Deskradar.Com",
+  "organization": "ACME Inc. ",
+  "country": "US",
+  "consent": true,
+  "marketing_consent": false,
+  "domain": "nonexistingdomain"
+}

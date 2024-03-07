@@ -1,0 +1,852 @@
+swagger: '2.0'
+info:
+  title: Deskradar Clients API
+  description: Provides client subscription data to clients and internal users and systems.
+  version: 1.0.6
+
+securityDefinitions:
+  bearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+
+tags:
+  - description: User authentication
+    name: auth
+  - description: Users operations
+    name: users
+  - description: Clients operations
+    name: clients
+  - description: Profile operations
+    name: profile
+  - description: Webhook operations"
+    name: webhooks
+
+paths:
+  /clients:
+    get:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/Client'
+            type: array
+        '401':
+          description: Authentication Error
+          schema:
+            $ref: '#/definitions/ResAuthError'
+        '403':
+          description: Forbidden
+      security:
+        - bearerAuth: []
+      tags:
+        - clients
+      description: Gets list of clients
+      summary: Gets Clients List
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReqPostClient'
+      responses:
+        '201':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/Client'
+            type: array
+        '401':
+          description: Authentication Error
+          schema:
+            $ref: '#/definitions/ResAuthError'
+        '403':
+          description: Forbidden
+        '422':
+          description: Validation Error
+          schema:
+            $ref: '#/definitions/ResValidationError'
+      security:
+        - bearerAuth: []
+      tags:
+        - clients
+      description: Creates a new client
+      summary: Creates Client
+
+  /clients/{id}:
+    parameters:
+      - description: Id of the client to use
+        in: path
+        name: id
+        required: true
+        type: string
+    delete:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '203':
+          description: Success
+        '401':
+          description: Authentication Error
+          schema:
+            $ref: '#/definitions/ResAuthError'
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+        - bearerAuth: []
+      tags:
+        - clients
+      description: Deletes a client using given id
+      summary: Deletes Client
+    get:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Client'
+        '401':
+          description: Authentication Error
+          schema:
+            $ref: '#/definitions/ResAuthError'
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+        - bearerAuth: []
+      tags:
+        - clients
+      description: Gets a client using given id
+      summary: Gets Client
+    put:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReqPutClient'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Client'
+        '401':
+          description: Authentication Error
+          schema:
+            $ref: '#/definitions/ResAuthError'
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Validation Error
+          schema:
+            $ref: '#/definitions/ResValidationError'
+      security:
+        - bearerAuth: []
+      tags:
+        - clients
+      description: Updates a client using given id and data
+      summary: Updates Client
+
+  /clients/{id}/deploy:
+    parameters:
+      - description: Id of the client to get
+        in: path
+        name: id
+        required: true
+        type: string
+    put:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Client'
+        '401':
+          description: Authentication Error
+          schema:
+            $ref: '#/definitions/ResAuthError'
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+        - bearerAuth: []
+      tags:
+        - clients
+      description: >-
+        Immediate invokation of instance deployment by calling a remote webhook
+        on a deployment system
+      summary: Deploys Client
+
+  /login:
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReqLogin'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ResLogin'
+        '403':
+          description: Non existing email
+        '422':
+          description: Validation Error
+          schema:
+            $ref: '#/definitions/ResValidationError'
+      tags:
+        - auth
+      description: >-
+        Create a token lasting one hour, and send magic link to the client/user
+        for login
+      summary: Sends magic login link
+
+  /login/confirm/{token}:
+    get:
+      produces:
+        - application/json
+      parameters:
+        - description: token to use for authenticating the user
+          in: path
+          name: token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ResLoginConfirm'
+        '403':
+          description: Token expired
+        '422':
+          description: Invalid parameters
+      tags:
+        - auth
+      description: Logs in user
+      summary: Logs in user
+
+  /my:
+    get:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Client'
+        '401':
+          description: Authentication Error
+          schema:
+            $ref: '#/definitions/ResAuthError'
+      security:
+        - bearerAuth: []
+      tags:
+        - profile
+      description: Gets profile of the logged in user/client
+      summary: Gets Profile
+    put:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              marketing_consent:
+                $ref: '#/definitions/Client/properties/marketing_consent'
+              name:
+                $ref: '#/definitions/Client/properties/name'
+              organization:
+                $ref: '#/definitions/Client/properties/organization'
+            type: object
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Client'
+        '401':
+          description: Authentication Error
+          schema:
+            $ref: '#/definitions/ResAuthError'
+        '422':
+          description: Validation Error
+          schema:
+            $ref: '#/definitions/ResValidationError'
+      security:
+        - bearerAuth: []
+      tags:
+        - profile
+      description: Updates profile of the logged in user/client
+      summary: Updates Profile
+
+  /users:
+    get:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/User'
+            type: array
+        '401':
+          description: Authentication Error
+          schema:
+            $ref: '#/definitions/ResAuthError'
+        '403':
+          description: Forbidden
+      security:
+        - bearerAuth: []
+      tags:
+        - users
+      description: Gets a list of users
+      summary: Gets Users List
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReqUser'
+      responses:
+        '201':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/User'
+            type: array
+        '401':
+          description: Authentication Error
+          schema:
+            $ref: '#/definitions/ResAuthError'
+        '403':
+          description: Forbidden
+        '422':
+          description: Validation Error
+          schema:
+            $ref: '#/definitions/ResValidationError'
+      security:
+        - bearerAuth: []
+      tags:
+        - users
+      description: Creates a new user
+      summary: Creates User
+
+  /users/{id}:
+    parameters:
+      - description: Id of the user to use
+        in: path
+        name: id
+        required: true
+        type: string
+    delete:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '203':
+          description: Success
+        '401':
+          description: Authentication Error
+          schema:
+            $ref: '#/definitions/ResAuthError'
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+        - bearerAuth: []
+      tags:
+        - users
+      description: Deletes a user using given id
+      summary: Deletes User
+    get:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/User'
+        '401':
+          description: Authentication Error
+          schema:
+            $ref: '#/definitions/ResAuthError'
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      security:
+        - bearerAuth: []
+      tags:
+        - users
+      description: Gets a user using given id
+      summary: Gets User
+    put:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReqUser'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/User'
+        '401':
+          description: Authentication Error
+          schema:
+            $ref: '#/definitions/ResAuthError'
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '422':
+          description: Validation Error
+          schema:
+            $ref: '#/definitions/ResValidationError'
+      security:
+        - bearerAuth: []
+      tags:
+        - users
+      description: Updates a user using given id and data
+      summary: Updates User
+
+  /webhooks/deployment:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      security:
+        - bearerAuth: []
+      tags:
+        - webhooks
+      description: >-
+        Receives events from deployment system and updates client deployment
+        data
+      summary: Handles Deployment System Events
+
+  /webhooks/paddle:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+        - webhooks
+      description: Receives events from paddle, and performs relevant actions
+      summary: Handles Paddle Events
+
+  /webhooks/websiteapi:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      security:
+        - bearerAuth: []
+      tags:
+        - webhooks
+      description: Receives events from Website API, and performs relevant actions
+      summary: Handles Website Events
+
+  /webhooks/logs:
+    get:
+      tags:
+        - webhooks
+      summary: Gets All Webhooks Log Entries List
+      description: Gets list of logged events registered on all webhooks
+      security:
+        - bearerAuth: []
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/WebhookLog'
+            type: array
+        '401':
+          description: Authentication Error
+          schema:
+            $ref: '#/definitions/ResAuthError'
+        '403':
+          description: Forbidden
+
+  /webhooks/logs/{webhook}:
+    get:
+      tags:
+        - webhooks
+      summary: Gets Specific Webhook Logs Entries List
+      description: Gets list of logged events registered on a specific webhook
+      security:
+        - bearerAuth: []
+      produces:
+        - application/json
+      parameters:
+        - description: Webhook name
+          enum:
+            - paddle
+            - deploy
+            - websiteapi
+          in: path
+          name: webhook
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/WebhookLog'
+            type: array
+        '401':
+          description: Authentication Error
+          schema:
+            $ref: '#/definitions/ResAuthError'
+        '403':
+          description: Forbidden
+
+definitions:
+  Client:
+    properties:
+      billing_email:
+        type: string
+        description: Client primary email used for subscription and billing communcation
+        example: office@acme.com
+        format: email
+      consent:
+        type: boolean
+        description: Client expressed consent with the terms of service
+        example: true
+      created_at:
+        format: date-time
+        description: Document creation date
+        example: '2018-01-01T00:00:00.000Z'
+        type: string
+      updated_at:
+        format: date-time
+        description: Document update date
+        example: '2018-01-01T00:00:00.000Z'
+        type: string
+      deployment:
+        $ref: '#/definitions/Deployment'
+      id:
+        type: string
+        description: Client ID
+        example: a01fff71baf82cd75943302e
+      marketing_consent:
+        type: boolean
+        description: Client expressed consent for receiving marketing information
+        example: true
+      name:
+        type: string
+        description: Contact person name
+        example: John Smith
+      organization:
+        type: string
+        description: Organization name
+        example: ACME Inc.
+      subscription:
+        description: Subscription data provided by Paddle
+        properties:
+          status:
+            description: |
+              Status of Paddle subscription.
+
+              See https://paddle.com/docs/subscription-status-reference for values description.
+
+              **trialing** value can technically be provided by Paddle.
+
+              Trials are managed outside of Paddle, so there must be now plans that
+            enum:
+              - active
+              - trialing
+              - past_due
+              - deleted
+            type: string
+          subscription_id:
+            type: string
+            description: Paddle subscription ID
+            example: '0123456789'
+          subscription_plan_id:
+            type: string
+            description: Paddle plan ID
+            example: '0123456789'
+        type: object
+
+  Deployment:
+    type: object
+    description: Deployment data
+    properties:
+      action:
+        type: string
+        example: enable
+        description: |
+          Defines the next action that the deployment system should take on the next run.
+          * **skip** - client will be ignored
+          * **enable** - if not already exists, instance will be deployed. If suspended, instance will be enabled.
+          * **destroy** - instance will be removed
+          * **reset** - all data on the instance will be removed
+          * **suspend** - client will be removed from public access
+        enum:
+          - skip
+          - enable
+          - destroy
+          - reset
+          - suspend
+      app_version:
+        type: string
+        description: Deskradar version to deploy.
+        example: '1.0.0'
+        pattern: '^(?:0|[1-9]\d{0,2})\.(?:0|[1-9]\d{0,2})\.(?:0|[1-9]\d{0,2})(?:\-dev)?$'
+      state:
+        type: string
+        description: |
+          Deployment state field stores feedback from deployment system.
+          * **new** - no deployment has been started yet
+          * **in_progress** - deployment is currently in progress
+          * **complete** - deployment has been successfully completed
+          * **failed** - deployment has failed
+        enum:
+          - new
+          - in_progress
+          - complete
+          - failed
+      trial:
+        type: boolean
+        description: Trial mode
+        example: true
+      trial_end_date:
+        type: string
+        description: Trial expiry date in ISO 8601 format
+        example: '2018-01-10T00:00:00.000Z'
+        format: date-time
+      domain:
+        type: string
+        description: |
+          Domain name for the cloud instance to be available on
+          (E.g. https://{domain}.deskradar.cloud/).
+          Valid value must be lowercase alphanumeric.
+          Must be unique across all deployments.
+        example: acme
+        minLength: 3
+        maxLength: 32
+        pattern: '^[a-z0-9]+$'
+      node:
+        type: string
+        description: Node hostname the instance is deployed on
+        example: node12.net.deskradar.com
+        format: hostname
+      ipaddress:
+        type: string
+        description: IP address of the machine the instance is hosted on.
+        example: '54.230.129.183'
+        format: ipv4
+      ssh_port:
+        type: integer
+        description: SSH port deployment system has to use to perform the action
+        example: 55732
+        minimum: 1024
+        maximum: 65535
+
+  ReqLogin:
+    properties:
+      email:
+        description: Email of a registered user/client
+        example: john@mail.com
+        type: string
+      url_template:
+        description: Url serving the login service
+        example: 'https://my.deskradar.com/login?&token=%token%'
+        type: string
+
+  ReqPostClient:
+    properties:
+      billing_email:
+        $ref: '#/definitions/Client/properties/billing_email'
+      consent:
+        $ref: '#/definitions/Client/properties/consent'
+      deployment:
+        $ref: '#/definitions/Client/properties/deployment'
+      marketing_consent:
+        $ref: '#/definitions/Client/properties/marketing_consent'
+      organization:
+        $ref: '#/definitions/Client/properties/organization'
+      subscription:
+        $ref: '#/definitions/Client/properties/subscription'
+
+  ReqPutClient:
+    properties:
+      billing_email:
+        $ref: '#/definitions/Client/properties/billing_email'
+      consent:
+        $ref: '#/definitions/Client/properties/consent'
+      deployment:
+        $ref: '#/definitions/Client/properties/deployment'
+      marketing_consent:
+        $ref: '#/definitions/Client/properties/marketing_consent'
+      organization:
+        $ref: '#/definitions/Client/properties/organization'
+      subscription:
+        $ref: '#/definitions/Client/properties/subscription'
+
+  ReqUser:
+    properties:
+      email:
+        $ref: '#/definitions/User/properties/email'
+      name:
+        $ref: '#/definitions/User/properties/name'
+      role:
+        $ref: '#/definitions/User/properties/role'
+
+  ResAuthError:
+    description: auth failure message
+    example: Unauthorized
+    type: string
+
+  ResLogin:
+    properties:
+      success:
+        description: >-
+          Flag indicating if the magic link was sent to the user/client
+          successfully
+        example: true
+        type: boolean
+
+  ResLoginConfirm:
+    properties:
+      token:
+        description: JWT Token
+        type: string
+
+  ResValidationError:
+    properties:
+      details:
+        items:
+          properties:
+            message:
+              description: validation failure message
+              example: email is required
+              type: string
+          type: object
+        type: array
+      name:
+        description: error name
+        example: ValidationError
+        type: string
+
+  User:
+    properties:
+      created_at:
+        description: Date of creation of the user
+        example: '2018-01-01T00:00:00.000Z'
+        type: string
+      email:
+        description: User email address
+        example: john@mail.com
+        type: string
+      id:
+        description: id of the user
+        example: a01fff71baf82cd75943302e
+        type: string
+      name:
+        description: User full name
+        example: John Smith
+        type: string
+      role:
+        default: admin
+        description: |
+          User roles determines access permissions of the user.
+          Currently there is only one user role.
+          * **admin** role has complete access
+        enum:
+          - admin
+        example: admin
+        type: string
+      updated_at:
+        description: Date of last update of the user
+        example: '2018-01-01T00:00:00.000Z'
+        type: string
+
+  WebhookLog:
+    properties:
+      actions:
+        description: Describes actions that have been executed based on that webhook call
+        example:
+          - action: client_created
+            details: {}
+            time: '2018-01-01T00:00:00.000Z'
+        items:
+          properties:
+            action:
+              type: string
+            details:
+              type: object
+            time:
+              type: string
+          type: object
+        type: array
+      created_at:
+        description: Date value on which the webhook was registered
+        example: '2018-01-10T00:00:00.000Z'
+        type: string
+      id:
+        description: Webhook log entry ID
+        example: a01fff71baf82cd75943302e
+        type: string
+      payload:
+        description: Payload to use for the webhook
+        example: ''
+        type: object
+      source:
+        description: Source of the webhook. See the corresponding endpoints for details.
+        enum:
+          - websiteapi
+          - deployment
+          - paddle
+        example: websiteapi
+        type: string

@@ -1,0 +1,21 @@
+{
+  "name": "Trial Client",
+  "email": "trial.client@deskradar.com",
+  "email_confirmed": false,
+  "organization": "Deskradar Inc.",
+  "country": "US",
+  "consent": true,
+  "marketing_consent": true,
+  "approved": true,
+  "deployment": {
+    "status": "non_existent",
+    "domain": "trialdomain",
+    "app_version": "1.0.0",
+    "trial": true,
+    "trial_end_date": "2018-01-10T00:00:00.000Z",
+    "node": "node12.net.deskradar.com",
+    "ipaddress": "54.230.129.183",
+    "ssh_port": 55732
+  },
+  "subscriptions": []
+}

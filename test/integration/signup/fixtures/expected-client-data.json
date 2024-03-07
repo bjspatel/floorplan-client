@@ -1,0 +1,20 @@
+{
+  "name": "John Doe",
+  "email": "nonexisting.client@deskradar.com",
+  "email_confirmed": false,
+  "organization": "ACME Inc.",
+  "country": "US",
+  "consent": true,
+  "marketing_consent": false,
+  "approved": false,
+  "deployment": {
+    "status": "non_existent",
+    "app_version": "0.0.0",
+    "trial": true,
+    "domain": "nonexistingdomain",
+    "node": "",
+    "ipaddress": "",
+    "ssh_port": 22
+  },
+  "subscriptions": []
+}
